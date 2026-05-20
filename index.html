@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>공인중개사 5분 입문 · Claude Cowork 시작하기 | 부동산 하는 도시아재 강의</title>
+  <meta name="description" content="매물 분석·광고·카톡 응대·보고서를 한 화면에서. 공인중개사가 5분 안에 따라할 수 있는 Claude Cowork 입문 가이드." />
+  <meta property="og:title" content="공인중개사 5분 입문 · Claude Cowork 시작하기" />
+  <meta property="og:description" content="매물 분석·광고·카톡 응대·보고서를 한 화면에서. 공인중개사 5분 입문 가이드." />
+  <meta property="og:type" content="website" />
+
+  <!-- FOUC 방지: 페이지 그리기 직전에 테마 결정 -->
+  <script>
+    (function() {
+      try {
+        var s = localStorage.getItem('cowork-intro-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = s || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Pretendard -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+  <!-- JetBrains Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ink: #0A0A0A;
+      --paper: #FFFCEF;
+      --yellow: #FFD600;
+      --pink: #FF4D8D;
+      --blue: #3B82F6;
+      --mint: #A7F3D0;
+      --purple: #C4B5FD;
+      --card: #FFFFFF;
+      --muted: #4B5563;
+      --muted-2: #6B7280;
+      --soft-y: #FEF9C3;
+      --soft-y-2: #FEFCE8;
+      --soft-p: #FFF1F2;
+      --soft-g: #F0FDF4;
+      --code-inline-bg: #F3F4F6;
+      --section-divider: #0A0A0A;
+    }
+
+    [data-theme="dark"] {
+      --ink: #F2F0E5;
+      --paper: #14121A;
+      --card: #20202A;
+      --muted: #C8C6D4;
+      --muted-2: #A8A6B8;
+      --soft-y: #3D3618;
+      --soft-y-2: #2E2A14;
+      --soft-p: #3A1C24;
+      --soft-g: #1A2A20;
+      --code-inline-bg: #2A2A35;
+      --section-divider: #F2F0E5;
+    }
+
+    * { font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
+    body { background: var(--paper); color: var(--ink); transition: background 0.25s ease, color 0.25s ease; }
+    .font-mono, pre, code { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+    /* 네오브루탈 카드 */
+    .nb-card {
+      border: 3px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--ink);
+      border-radius: 20px;
+      background: var(--card);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.25s ease;
+    }
+    .nb-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 10px 10px 0 var(--ink);
+    }
+    .nb-card-sm {
+      border: 3px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      border-radius: 16px;
+      background: var(--card);
+      transition: background 0.25s ease;
+    }
+
+    /* 네오브루탈 버튼 */
+    .nb-btn {
+      border: 3px solid var(--ink);
+      box-shadow: 6px 6px 0 var(--ink);
+      border-radius: 12px;
+      font-weight: 900;
+      padding: 14px 24px;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      display: inline-block;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nb-btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+    .nb-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+    .nb-btn-primary { background: var(--yellow); color: #0A0A0A; }
+    .nb-btn-secondary { background: var(--card); color: var(--ink); }
+
+    /* 테마 토글 버튼 */
+    .theme-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 60;
+      width: 52px;
+      height: 52px;
+      border: 3px solid var(--ink);
+      box-shadow: 4px 4px 0 var(--ink);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.25s ease;
+    }
+    .theme-toggle:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+    .theme-toggle:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+    [data-theme="light"] .theme-icon-dark,
+    :root:not([data-theme="dark"]) .theme-icon-dark { display: none; }
+    [data-theme="dark"] .theme-icon-light { display: none; }
+
+    /* 키네틱 타이포 */
+    .kinetic:hover { animation: shake 0.4s ease-in-out; }
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-1deg); }
+      75% { transform: rotate(1deg); }
+    }
+
+    /* 그라데이션 메쉬 */
+    .mesh-bg {
+      background:
+        radial-gradient(at 18% 22%, var(--yellow) 0%, transparent 50%),
+        radial-gradient(at 82% 28%, var(--pink) 0%, transparent 50%),
+        radial-gradient(at 50% 85%, var(--mint) 0%, transparent 55%),
+        var(--paper);
+      transition: background 0.25s ease;
+    }
+    [data-theme="dark"] .mesh-bg {
+      background:
+        radial-gradient(at 18% 22%, rgba(255,214,0,0.5) 0%, transparent 50%),
+        radial-gradient(at 82% 28%, rgba(255,77,141,0.45) 0%, transparent 50%),
+        radial-gradient(at 50% 85%, rgba(167,243,208,0.4) 0%, transparent 55%),
+        var(--paper);
+    }
+    [data-theme="dark"] .mesh-bg h1,
+    [data-theme="dark"] .mesh-bg p,
+    [data-theme="dark"] .mesh-bg strong { color: var(--ink); }
+
+    /* 섹션 태그 */
+    .section-tag {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+
+    /* 워커 카드 색상 */
+    .worker-a { background: var(--mint); }
+    .worker-b { background: var(--yellow); }
+    .worker-c { background: var(--pink); color: white; }
+    .worker-d { background: var(--purple); }
+
+    /* 워커 카드 등장 애니메이션 (첫 진입 시에도 내용 식별 가능, 버튼 클릭 시 또렷해짐) */
+    .worker-card {
+      opacity: 0.65;
+      transform: translateY(8px) scale(0.985);
+      filter: saturate(0.85);
+      transition: opacity 0.45s ease, transform 0.45s ease, filter 0.45s ease, box-shadow 0.45s ease;
+    }
+    .worker-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: saturate(1.05);
+    }
+
+    /* 워커 진행바 */
+    .worker-progress {
+      height: 6px;
+      background: rgba(0,0,0,0.15);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+    .worker-progress > div {
+      height: 100%;
+      width: 0%;
+      background: var(--ink);
+      transition: width 0.6s ease;
+    }
+    .worker-card.visible .worker-progress > div { width: 100%; }
+
+    /* 펼침 */
+    .reveal { display: none; }
+    .reveal.open { display: block; }
+
+    /* 코드 블록 (라이트/다크 무관하게 검정 배경 + mint 글씨) */
+    .code-block {
+      background: #0A0A0A;
+      color: var(--mint);
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      border: 2px solid #0A0A0A;
+    }
+
+    /* 체크리스트 */
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 18px;
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      background: var(--card);
+      cursor: pointer;
+      transition: background 0.2s ease;
+      color: var(--ink);
+    }
+    .check-item.done { background: var(--mint); color: #0A0A0A; }
+    .check-item.done p { text-decoration: line-through; opacity: 0.7; }
+    .check-item .box {
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--ink);
+      border-radius: 6px;
+      flex-shrink: 0;
+      background: var(--card);
+      position: relative;
+      margin-top: 2px;
+    }
+    .check-item.done .box { background: #0A0A0A; }
+    .check-item.done .box::after {
+      content: '✓';
+      color: var(--yellow);
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    /* 칩(시간 절약 뱃지) */
+    .chip { display: inline-block; padding: 4px 12px; border: 2px solid var(--ink); border-radius: 999px; font-weight: 900; font-size: 13px; color: #0A0A0A; }
+
+    /* 코드 인라인 */
+    code:not(pre code) { background: var(--code-inline-bg); padding: 2px 8px; border-radius: 6px; font-size: 0.9em; color: var(--ink); }
+
+    /* 셰브론 회전 */
+    .chevron { transition: transform 0.2s ease; }
+    .case-toggle[aria-expanded="true"] .chevron { transform: rotate(90deg); }
+
+    /* 접근성 */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .sr-only.focus\:not-sr-only:focus { position: static; width: auto; height: auto; padding: 14px 24px; margin: 0; overflow: visible; clip: auto; white-space: normal; }
+
+    /* ===== Tailwind 색상 클래스의 라이트/다크 보정 ===== */
+    /* bg-white 클래스는 다크에서 카드 톤으로 */
+    [data-theme="dark"] .bg-white { background-color: var(--card) !important; }
+    /* 검정 보더는 다크에서 ink 변수 따라가게 */
+    [data-theme="dark"] .border-black { border-color: var(--ink) !important; }
+    /* 회색 텍스트: 라이트는 그대로, 다크는 밝은 회색으로 끌어올림 */
+    [data-theme="dark"] .text-gray-700 { color: var(--muted) !important; }
+    [data-theme="dark"] .text-gray-600 { color: var(--muted) !important; }
+    [data-theme="dark"] .text-gray-500 { color: var(--muted-2) !important; }
+    [data-theme="dark"] .text-gray-400 { color: var(--muted-2) !important; }
+    [data-theme="dark"] .text-gray-300 { color: #D4D2DC !important; }
+    /* BEFORE/AFTER 라벨도 다크에서 한 단계 밝게 */
+    [data-theme="dark"] .text-red-600 { color: #FCA5A5 !important; }
+    [data-theme="dark"] .text-green-700 { color: #86EFAC !important; }
+    /* 컬러 강조 배경(인라인 var) 위 텍스트는 라이트/다크 모두 검정 고정 */
+    [style*="--yellow"]:not(.theme-toggle):not(.nb-btn-primary),
+    [style*="--mint"],
+    [style*="--purple"] { color: #0A0A0A; }
+    /* 패스텔 인라인 배경 위 텍스트도 검정 고정 (다크에서는 위 변수가 어두워져 자동 대비) */
+    [style*="--soft-y"],
+    [style*="--soft-y-2"],
+    [style*="--soft-p"],
+    [style*="--soft-g"] { color: #0A0A0A; }
+    [data-theme="dark"] [style*="--soft-y"],
+    [data-theme="dark"] [style*="--soft-y-2"],
+    [data-theme="dark"] [style*="--soft-p"],
+    [data-theme="dark"] [style*="--soft-g"] { color: var(--ink); }
+    /* nb-card-sm가 paper 변수를 인라인으로 쓰는 경우 — 텍스트는 ink 변수 따라감(자동 대비) */
+  </style>
+</head>
+<body class="min-h-screen">
+  <a href="#main" class="sr-only focus:not-sr-only nb-btn nb-btn-primary" style="position: absolute; top: 16px; left: 16px; z-index: 50;">본문 바로가기</a>
+
+  <button id="theme-toggle" type="button" class="theme-toggle" aria-label="다크 모드 전환" title="라이트/다크 전환">
+    <span class="theme-icon-light" aria-hidden="true">🌙</span>
+    <span class="theme-icon-dark" aria-hidden="true">☀️</span>
+  </button>
+
+  <!-- ============ HERO ============ -->
+  <section class="mesh-bg border-b-[3px] border-black">
+    <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <div class="inline-block bg-black font-black text-sm px-4 py-2 rounded-full mb-8" style="color: var(--yellow);">
+        🏢 공인중개사 5분 입문
+      </div>
+      <h1 class="font-black text-4xl md:text-7xl leading-tight mb-6 kinetic">
+        공인중개사 업무,<br/>
+        <span class="inline-block border-[3px] border-black px-3 my-1" style="background: var(--yellow); box-shadow: 6px 6px 0 #0A0A0A; color: #0A0A0A;">반으로 줄이는 첫걸음.</span><br/>
+        Claude Cowork 시작하기.
+      </h1>
+      <p class="text-lg md:text-xl font-medium max-w-3xl mb-10 leading-relaxed">
+        매물 분석 · 광고문 · 카톡 응대 · 보고서 — 흩어진 일을 <strong>한 화면에서 한 흐름으로</strong> 정리하는 AI 워크스페이스입니다.
+      </p>
+      <div class="flex flex-wrap gap-4 mb-12">
+        <a href="#how" class="nb-btn nb-btn-primary text-lg">5분 안에 따라하기 ↓</a>
+        <a href="https://claude.ai" target="_blank" rel="noopener" class="nb-btn nb-btn-secondary text-lg">Cowork 바로 열기 ↗</a>
+      </div>
+      <div class="nb-card-sm p-4 inline-block">
+        <p class="text-sm font-medium">
+          이 페이지는 <strong>공인중개사 강사가 직접 써본 흐름</strong>을 그대로 옮긴 가이드입니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!-- ============ WHAT ============ -->
+    <section class="border-b-[3px] border-black bg-white">
+      <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div class="mb-12">
+          <span class="section-tag">WHAT · 뭡니까?</span>
+          <h2 class="font-black text-3xl md:text-5xl mt-4 mb-3 kinetic">그래서 이게 뭡니까?</h2>
+          <p class="text-lg font-medium text-gray-700">어려운 IT 용어 없이 한 줄씩만 설명드립니다.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="nb-card p-6" style="background: var(--mint);">
+            <div class="text-5xl mb-4">🗂️</div>
+            <h3 class="font-black text-xl mb-3">흩어진 일이<br/>한 화면에</h3>
+            <p class="font-medium leading-relaxed">매물 분석·광고문·고객 응대를 따로따로 챗GPT 켜서 하지 마세요. <strong>한 워크스페이스에 묶어 두고</strong> 필요할 때마다 꺼내 쓰는 도구입니다.</p>
+          </div>
+          <div class="nb-card p-6" style="background: var(--yellow);">
+            <div class="text-5xl mb-4">🧠</div>
+            <h3 class="font-black text-xl mb-3">매번 다시 설명<br/>안 해도 OK</h3>
+            <p class="font-medium leading-relaxed">내 사무소가 어디인지, 단골 고객은 누구인지, 자주 쓰는 문구는 뭔지 — <strong>한 번 알려주면 계속 기억</strong>합니다.</p>
+          </div>
+          <div class="nb-card p-6 text-white" style="background: var(--pink);">
+            <div class="text-5xl mb-4">⚡</div>
+            <h3 class="font-black text-xl mb-3">동시에 여러 일을<br/>시킵니다</h3>
+            <p class="font-medium leading-relaxed mb-4">"광화문 A아파트 분석해줘" 한 줄이면 <strong>시세·광고·응대·보고서</strong> 4가지를 동시에 작업합니다.</p>
+            <a href="#dispatch" class="font-black underline">↓ Dispatch 데모로 가기</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW ============ -->
+    <section id="how" class="border-b-[3px] border-black" style="background: var(--paper);">
+      <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div class="mb-12">
+          <span class="section-tag">HOW · 시작하기</span>
+          <h2 class="font-black text-3xl md:text-5xl mt-4 mb-3 kinetic">그래서 어떻게 시작합니까?</h2>
+          <p class="text-lg font-medium text-gray-700">진짜 3단계. 가입부터 첫 결과물까지 5분.</p>
+        </div>
+
+        <div class="space-y-8">
+          <!-- Step 1 -->
+          <div class="nb-card p-8 grid md:grid-cols-[120px_1fr] gap-6">
+            <div class="font-black text-7xl" style="color: var(--yellow); text-shadow: 4px 4px 0 #0A0A0A;">01</div>
+            <div>
+              <h3 class="font-black text-2xl mb-4">이메일 하나면 됩니다 <span class="text-base font-medium text-gray-500">(약 1분)</span></h3>
+              <ol class="list-decimal list-outside ml-5 space-y-2 font-medium">
+                <li><code>claude.ai</code> 접속</li>
+                <li>이메일·구글 계정으로 가입 (무료부터 시작 가능)</li>
+                <li>한국어 설정 — 우측 상단 프로필 → Settings → Language → 한국어</li>
+              </ol>
+              <div class="mt-4 p-3 border-[2px] border-black rounded-lg text-sm font-medium" style="background: var(--soft-y);">
+                💡 <strong>팁</strong>: 강의 진도용은 유료(Pro/Max) 추천. 무료는 글자 수·횟수 제한이 있어 매물 분석 한 번에 끊길 수 있습니다.
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="nb-card p-8 grid md:grid-cols-[120px_1fr] gap-6">
+            <div class="font-black text-7xl" style="color: var(--pink); text-shadow: 4px 4px 0 #0A0A0A;">02</div>
+            <div>
+              <h3 class="font-black text-2xl mb-4">"내 사무소" 작업 공간 만들기 <span class="text-base font-medium text-gray-500">(약 1분)</span></h3>
+              <ol class="list-decimal list-outside ml-5 space-y-2 font-medium">
+                <li>좌측 사이드바 <code>Projects</code> → <code>+ New Project</code></li>
+                <li>이름: "부동산 하는 도시아재" (본인 사무소 이름으로)</li>
+                <li><strong>System Instructions</strong>에 다음 한 줄 입력:</li>
+              </ol>
+              <pre class="code-block mt-3">나는 서울 ○○구 공인중개사입니다.
+매물 분석·광고·고객 응대 작업을 자주 합니다.
+답변은 카톡으로 그대로 복사할 수 있는 자연스러운 한국어로 해주세요.</pre>
+              <div class="mt-4 p-3 border-[2px] border-black rounded-lg text-sm font-medium" style="background: var(--soft-y);">
+                💡 <strong>팁</strong>: 이 System Instructions가 "한 번 알려주면 계속 기억"의 핵심입니다.
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="nb-card p-8 grid md:grid-cols-[120px_1fr] gap-6" style="background: var(--mint);">
+            <div class="font-black text-7xl text-white" style="text-shadow: 4px 4px 0 #0A0A0A;">03</div>
+            <div>
+              <h3 class="font-black text-2xl mb-4">매물 한 건 분석시켜 보기 <span class="text-base font-medium text-gray-600">(약 3분)</span></h3>
+              <p class="font-medium mb-3">빈 채팅창에 그대로 붙여넣어 보세요:</p>
+              <pre class="code-block">서울 강남구 역삼동 ○○아파트 84㎡, 매매 25억 매물입니다.
+같은 단지 최근 거래가, 주변 시세, 강점·약점 3개씩,
+그리고 카톡으로 보낼 광고 문구 1개 만들어주세요.</pre>
+              <div class="mt-4 p-3 border-[2px] border-black rounded-lg text-sm font-medium bg-white">
+                <strong>기대 결과물</strong>: 단지 시세표 · 강점/약점 리스트 · 카톡용 광고문 한 단락이 한 번에 나옵니다.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ APPLY ============ -->
+    <section class="border-b-[3px] border-black bg-white">
+      <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div class="mb-12">
+          <span class="section-tag">APPLY · 적용</span>
+          <h2 class="font-black text-3xl md:text-5xl mt-4 mb-3 kinetic">그래서 내 일 어디에 씁니까?</h2>
+          <p class="text-lg font-medium text-gray-700">4가지만 기억하세요. 나머지는 응용입니다.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="nb-card p-6 flex gap-5 items-start">
+            <div class="text-5xl flex-shrink-0">🏢</div>
+            <div>
+              <h3 class="font-black text-xl mb-2">매물 분석</h3>
+              <p class="font-medium leading-relaxed mb-3">주소 한 줄 → 시세·등기·강점/약점 리포트</p>
+              <span class="chip" style="background: var(--mint);">30분 → 3분</span>
+            </div>
+          </div>
+          <div class="nb-card p-6 flex gap-5 items-start">
+            <div class="text-5xl flex-shrink-0">📣</div>
+            <div>
+              <h3 class="font-black text-xl mb-2">광고문 작성</h3>
+              <p class="font-medium leading-relaxed mb-3">분석 결과 → 블로그·당근·인스타 3채널 광고 카피</p>
+              <span class="chip" style="background: var(--yellow);">1시간 → 5분</span>
+            </div>
+          </div>
+          <div class="nb-card p-6 flex gap-5 items-start">
+            <div class="text-5xl flex-shrink-0">💬</div>
+            <div>
+              <h3 class="font-black text-xl mb-2">카톡 응대 초안</h3>
+              <p class="font-medium leading-relaxed mb-3">고객 문의 → 분류 + 자연스러운 답변 초안</p>
+              <span class="chip text-white" style="background: var(--pink);">10분 → 30초</span>
+            </div>
+          </div>
+          <div class="nb-card p-6 flex gap-5 items-start">
+            <div class="text-5xl flex-shrink-0">📋</div>
+            <div>
+              <h3 class="font-black text-xl mb-2">고객 보고서</h3>
+              <p class="font-medium leading-relaxed mb-3">임장 메모 → 깔끔한 PDF용 보고서</p>
+              <span class="chip" style="background: var(--purple);">1시간 → 10분</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 p-6 nb-card-sm" style="background: var(--paper);">
+          <p class="font-bold text-lg">💡 <strong>모두 같은 패턴</strong>: "내 사무소" 워크스페이스에 정보 한 번 넣어두면, 4가지 모두 <strong>"한 줄 입력 → 한 화면 출력"</strong>입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CASES ============ -->
+    <section id="cases" class="border-b-[3px] border-black" style="background: var(--paper);">
+      <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div class="mb-12">
+          <span class="section-tag">CASES · 사례</span>
+          <h2 class="font-black text-3xl md:text-5xl mt-4 mb-3 kinetic">직접 눌러보세요</h2>
+          <p class="text-lg font-medium text-gray-700">강사가 실제로 강의에서 시연하는 사례입니다.</p>
+        </div>
+
+        <div class="space-y-6 mb-16">
+          <!-- Case 1 -->
+          <div class="nb-card overflow-hidden">
+            <button type="button" class="case-toggle w-full text-left p-6 flex items-center justify-between gap-4" data-target="case-1" aria-expanded="false">
+              <div class="flex-1">
+                <div class="text-sm font-black mb-1" style="color: var(--pink);">CASE 01</div>
+                <h3 class="font-black text-xl md:text-2xl">주소만 넣고 임장 가방 챙기기</h3>
+                <p class="font-medium text-gray-700 mt-1">오전 10시, 고객이 갑자기 "광화문 A아파트 볼 수 있어요?"</p>
+              </div>
+              <div class="text-3xl chevron">›</div>
+            </button>
+            <div id="case-1" class="reveal px-6 pb-6 border-t-[3px] border-black pt-6" style="background: var(--soft-y-2);">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <div class="font-black text-sm mb-2 text-red-600">BEFORE</div>
+                  <p class="font-medium">네이버부동산 · 호갱노노 · 디스코 3개 창 동시에 열고 <strong>30분</strong></p>
+                </div>
+                <div>
+                  <div class="font-black text-sm mb-2 text-green-700">AFTER</div>
+                  <ol class="list-decimal list-outside ml-5 space-y-2 font-medium">
+                    <li>Cowork에 주소 한 줄 입력 → <strong>3분</strong> 만에 시세·근거리 비교·교통 정리 출력</li>
+                    <li>그대로 카톡으로 고객에게 "오시는 동안 보세요" 전송</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case 2 -->
+          <div class="nb-card overflow-hidden">
+            <button type="button" class="case-toggle w-full text-left p-6 flex items-center justify-between gap-4" data-target="case-2" aria-expanded="false">
+              <div class="flex-1">
+                <div class="text-sm font-black mb-1" style="color: var(--pink);">CASE 02</div>
+                <h3 class="font-black text-xl md:text-2xl">한 번 적은 광고, 3채널로 자동 변환</h3>
+                <p class="font-medium text-gray-700 mt-1">같은 매물 광고를 블로그·당근·인스타에 3번 다시 쓰는 중</p>
+              </div>
+              <div class="text-3xl chevron">›</div>
+            </button>
+            <div id="case-2" class="reveal px-6 pb-6 border-t-[3px] border-black pt-6" style="background: var(--soft-p);">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <div class="font-black text-sm mb-2 text-red-600">BEFORE</div>
+                  <p class="font-medium">카피 3번 변형 + 해시태그·길이 조정 = <strong>1시간</strong></p>
+                </div>
+                <div>
+                  <div class="font-black text-sm mb-2 text-green-700">AFTER</div>
+                  <ol class="list-decimal list-outside ml-5 space-y-2 font-medium">
+                    <li>매물 정보 1번 입력 → 블로그(긴 글) · 당근(짧고 친근) · 인스타(이모지) <strong>3개 동시 출력</strong></li>
+                    <li>그대로 복사·붙여넣기</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Case 3 -->
+          <div class="nb-card overflow-hidden">
+            <button type="button" class="case-toggle w-full text-left p-6 flex items-center justify-between gap-4" data-target="case-3" aria-expanded="false">
+              <div class="flex-1">
+                <div class="text-sm font-black mb-1" style="color: var(--pink);">CASE 03</div>
+                <h3 class="font-black text-xl md:text-2xl">카톡 문의 폭주 → 분류 + 답변 초안</h3>
+                <p class="font-medium text-gray-700 mt-1">광고 하나 올렸더니 카톡 문의 50개</p>
+              </div>
+              <div class="text-3xl chevron">›</div>
+            </button>
+            <div id="case-3" class="reveal px-6 pb-6 border-t-[3px] border-black pt-6" style="background: var(--soft-g);">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <div class="font-black text-sm mb-2 text-red-600">BEFORE</div>
+                  <p class="font-medium">1개씩 읽고 답변 = <strong>2시간</strong> + 놓치는 고객</p>
+                </div>
+                <div>
+                  <div class="font-black text-sm mb-2 text-green-700">AFTER</div>
+                  <ol class="list-decimal list-outside ml-5 space-y-2 font-medium">
+                    <li>문의 50개 붙여넣기 → "진성/단순문의/스팸" <strong>자동 분류</strong></li>
+                    <li>진성 고객 답변 초안까지 같이 → 검토·수정만 하면 끝</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ DISPATCH DEMO ============ -->
+        <div id="dispatch" class="nb-card p-6 md:p-12" style="background: #0A0A0A; color: white; border-color: #0A0A0A; box-shadow: 8px 8px 0 #0A0A0A;">
+          <div class="mb-6">
+            <span class="section-tag" style="background: var(--yellow); color: var(--ink);">🔥 CASE 04 · DISPATCH DEMO</span>
+            <h3 class="font-black text-3xl md:text-4xl mt-4 mb-3">주소 한 줄, 동시에 4가지 작업</h3>
+            <p class="font-medium text-gray-300">눌러보세요. 4개 워커가 동시에 분기되는 모습을 볼 수 있습니다.</p>
+          </div>
+
+          <div class="bg-white text-black p-6 rounded-2xl border-[3px] mb-6" style="border-color: var(--yellow);">
+            <div class="font-black text-sm mb-2 text-gray-500">입력 예시</div>
+            <pre class="font-mono text-sm whitespace-pre-wrap text-black">광화문 한일아파트 84㎡, 매매 18억 매물.
+오후 임장 예정, 고객은 30대 신혼부부.</pre>
+          </div>
+
+          <button id="dispatch-run" type="button" class="nb-btn nb-btn-primary text-lg w-full md:w-auto">
+            ▶ Dispatch 시작
+          </button>
+
+          <div id="dispatch-workers" class="mt-8 grid md:grid-cols-2 gap-6">
+            <div class="worker-card nb-card p-6 worker-a" data-worker="a">
+              <div class="flex items-start justify-between mb-3 text-black">
+                <div>
+                  <div class="font-black text-xs mb-1">WORKER A</div>
+                  <h4 class="font-black text-lg">시세 분석</h4>
+                </div>
+                <div class="text-2xl">📊</div>
+              </div>
+              <p class="font-medium text-sm text-black mb-3">같은 단지 최근 5건 거래·근거리 비교 분석</p>
+              <div class="worker-progress"><div></div></div>
+              <button type="button" class="worker-detail-btn text-xs font-black underline text-black mt-3" data-target="worker-a-detail">프롬프트 예시 보기 ↓</button>
+              <pre id="worker-a-detail" class="reveal mt-3 code-block text-xs">다음 매물의 시세 분석을 해줘.
+같은 단지 최근 거래, 인근 단지 비교,
+강점·약점 각 3개.
+- 단지: 광화문 한일아파트
+- 면적: 84㎡
+- 가격: 매매 18억</pre>
+            </div>
+
+            <div class="worker-card nb-card p-6 worker-b" data-worker="b">
+              <div class="flex items-start justify-between mb-3 text-black">
+                <div>
+                  <div class="font-black text-xs mb-1">WORKER B</div>
+                  <h4 class="font-black text-lg">광고 카피</h4>
+                </div>
+                <div class="text-2xl">📣</div>
+              </div>
+              <p class="font-medium text-sm text-black mb-3">신혼부부 톤 광고문 (블로그·당근·인스타)</p>
+              <div class="worker-progress"><div></div></div>
+              <button type="button" class="worker-detail-btn text-xs font-black underline text-black mt-3" data-target="worker-b-detail">프롬프트 예시 보기 ↓</button>
+              <pre id="worker-b-detail" class="reveal mt-3 code-block text-xs">위 매물을 30대 신혼부부 톤으로 광고해줘.
+3개 채널: 블로그(긴 글), 당근(짧고 친근),
+인스타(이모지+해시태그).</pre>
+            </div>
+
+            <div class="worker-card nb-card p-6 worker-c" data-worker="c">
+              <div class="flex items-start justify-between mb-3">
+                <div>
+                  <div class="font-black text-xs mb-1">WORKER C</div>
+                  <h4 class="font-black text-lg">카톡 응대</h4>
+                </div>
+                <div class="text-2xl">💬</div>
+              </div>
+              <p class="font-medium text-sm mb-3">"임장 시 체크포인트" 안내 메시지 초안</p>
+              <div class="worker-progress" style="background: rgba(255,255,255,0.3);"><div style="background: white;"></div></div>
+              <button type="button" class="worker-detail-btn text-xs font-black underline mt-3" data-target="worker-c-detail">프롬프트 예시 보기 ↓</button>
+              <pre id="worker-c-detail" class="reveal mt-3 code-block text-xs">고객에게 보낼 임장 직전 카톡 메시지를 만들어줘.
+신혼부부 톤, 체크포인트 5개 포함,
+카톡으로 그대로 보낼 수 있게.</pre>
+            </div>
+
+            <div class="worker-card nb-card p-6 worker-d" data-worker="d">
+              <div class="flex items-start justify-between mb-3 text-black">
+                <div>
+                  <div class="font-black text-xs mb-1">WORKER D</div>
+                  <h4 class="font-black text-lg">고객 보고서</h4>
+                </div>
+                <div class="text-2xl">📋</div>
+              </div>
+              <p class="font-medium text-sm text-black mb-3">임장 후 PDF용 1장 요약 보고서 템플릿</p>
+              <div class="worker-progress"><div></div></div>
+              <button type="button" class="worker-detail-btn text-xs font-black underline text-black mt-3" data-target="worker-d-detail">프롬프트 예시 보기 ↓</button>
+              <pre id="worker-d-detail" class="reveal mt-3 code-block text-xs">임장 직후 고객에게 보낼 1장 요약 보고서를 만들어줘.
+형식: 매물 요약·강점/약점·총평·다음 액션.
+PDF 출력용으로 깔끔하게.</pre>
+            </div>
+          </div>
+
+          <div id="dispatch-done" class="reveal mt-8 p-5 rounded-xl" style="background: var(--yellow); color: #0A0A0A; border: 3px solid #0A0A0A; box-shadow: 6px 6px 0 #0A0A0A;">
+            <p class="font-bold leading-relaxed">💡 <strong>포인트</strong>: 이게 바로 "Dispatch" — 한 입력으로 여러 작업을 <strong>동시에 분배</strong>해서 시간을 절반 이하로 줄이는 패턴입니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEXT ============ -->
+    <section class="border-b-[3px] border-black bg-white">
+      <div class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div class="mb-12">
+          <span class="section-tag">NEXT · 다음 단계</span>
+          <h2 class="font-black text-3xl md:text-5xl mt-4 mb-3 kinetic">오늘 안에 해볼 일 3개</h2>
+          <p class="text-lg font-medium text-gray-700">어렵지 않습니다. 체크박스 3개만 채워보세요.</p>
+        </div>
+
+        <div class="space-y-3 mb-12 max-w-3xl">
+          <div class="check-item" data-check>
+            <div class="box"></div>
+            <p class="font-medium"><code>claude.ai</code> 가입하고 한국어 설정</p>
+          </div>
+          <div class="check-item" data-check>
+            <div class="box"></div>
+            <p class="font-medium">"내 사무소" Project 만들고 System Instructions 1줄 입력</p>
+          </div>
+          <div class="check-item" data-check>
+            <div class="box"></div>
+            <p class="font-medium">오늘 본 매물 1건 분석시켜 보고 결과 카톡으로 자기 자신한테 보내기</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <div class="nb-card-sm p-6" style="background: var(--mint);">
+            <div class="font-black text-sm mb-2">▶ 일주일 후</div>
+            <p class="font-medium">4가지 진입점 중 본인 사무소에 가장 도움 되는 1가지를 정해서 <strong>하루 1번씩 7일 연속 사용</strong></p>
+          </div>
+          <div class="nb-card-sm p-6" style="background: var(--yellow);">
+            <div class="font-black text-sm mb-2">▶ 한 달 후</div>
+            <p class="font-medium">본인만의 "자주 쓰는 프롬프트" <strong>5개가 자연스럽게 만들어집니다</strong></p>
+          </div>
+        </div>
+
+        <div class="nb-card p-8 md:p-12 text-center" style="background: var(--pink); color: white;">
+          <h3 class="font-black text-3xl md:text-4xl mb-4">더 깊게 배우고 싶으세요?</h3>
+          <p class="text-lg font-medium mb-8 max-w-2xl mx-auto">
+            신화 대표가 운영하는 <strong>공인중개사 AI 강의</strong>에서 위 4가지를 4주에 걸쳐 사례·실습으로 배웁니다. 1:1 코칭도 합니다.
+          </p>
+          <a href="mailto:sachol.cap@gmail.com?subject=%5B%EA%B3%B5%EC%9D%B8%EC%A4%91%EA%B0%9C%EC%82%AC%20AI%20%EA%B0%95%EC%9D%98%5D%20%EB%AC%B8%EC%9D%98" class="nb-btn nb-btn-primary text-lg inline-block">📧 sachol.cap@gmail.com</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="py-12" style="background: #0A0A0A; color: var(--yellow);">
+      <div class="max-w-6xl mx-auto px-6">
+        <p class="font-medium leading-relaxed max-w-3xl">
+          이 페이지는 <strong>신화 대표가 직접 만든 강의 자료</strong>입니다.<br/>
+          마음에 드는 분은 자유롭게 공유해 주세요.<br/>
+          <span class="text-gray-400">만든 과정 자체가 강의 사례 — 궁금하시면 강의에서 같이 만들어 봅니다.</span>
+        </p>
+        <div class="mt-8 pt-8 border-t border-yellow-300/30 text-sm text-gray-400 font-medium">
+          © 2026 부동산 하는 도시아재 · gpters 22기 W1 미니 사례 · Made with Claude Code
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Case toggle (1-3)
+    document.querySelectorAll('.case-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = document.getElementById(btn.dataset.target);
+        const isOpen = target.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    });
+
+    // Worker detail toggle
+    document.querySelectorAll('.worker-detail-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const target = document.getElementById(btn.dataset.target);
+        target.classList.toggle('open');
+      });
+    });
+
+    // Dispatch run — 4개 워커 시간차 등장 (병렬 메타포)
+    document.getElementById('dispatch-run').addEventListener('click', () => {
+      const workers = document.querySelectorAll('.worker-card');
+      const done = document.getElementById('dispatch-done');
+      workers.forEach(w => w.classList.remove('visible'));
+      done.classList.remove('open');
+      workers.forEach((w, i) => {
+        setTimeout(() => w.classList.add('visible'), 200 + i * 250);
+      });
+      setTimeout(() => done.classList.add('open'), 200 + workers.length * 250 + 600);
+    });
+
+    // Checklist
+    document.querySelectorAll('[data-check]').forEach(item => {
+      item.addEventListener('click', () => item.classList.toggle('done'));
+    });
+
+    // Theme toggle (라이트/다크)
+    (function() {
+      const root = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('cowork-intro-theme', next); } catch (e) {}
+        btn.setAttribute('aria-label', next === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환');
+      });
+      // 시스템 설정 변경 시(사용자가 명시적 선택 없을 때만) 따라가기
+      if (window.matchMedia) {
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        mq.addEventListener && mq.addEventListener('change', (e) => {
+          try {
+            if (localStorage.getItem('cowork-intro-theme')) return;
+          } catch (err) {}
+          root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
