@@ -1,5 +1,8 @@
 # 강사가 먼저 직접 만들어 본 'Cowork 5분 입문' 대시보드 ✨ — 내 분야 수강생용 메인·서브 구조 + 라이트/다크 + Dispatch 데모
 
+> 🌐 **결과물 미리보기**: <https://sachol.github.io/cityuncle-cowork-intro-dashboard/>
+> 📦 **코드 저장소**: <https://github.com/sachol/cityuncle-cowork-intro-dashboard>
+
 ---
 
 ## 소개
