@@ -278,8 +278,14 @@
     .sr-only.focus\:not-sr-only:focus { position: static; width: auto; height: auto; padding: 14px 24px; margin: 0; overflow: visible; clip: auto; white-space: normal; }
 
     /* ===== Tailwind 색상 클래스의 라이트/다크 보정 ===== */
-    /* bg-white 클래스는 다크에서 카드 톤으로 */
+    /* bg-white 클래스는 다크에서 카드 톤으로 + 내부 텍스트도 ink로 (어두운 카드 위 검정 글씨 가독성 문제 방지) */
     [data-theme="dark"] .bg-white { background-color: var(--card) !important; }
+    [data-theme="dark"] .bg-white,
+    [data-theme="dark"] .bg-white * { color: var(--ink); }
+    /* bg-white 안의 회색 라벨은 다크에서 밝은 회색으로 (인라인 color는 보존) */
+    [data-theme="dark"] .bg-white .text-gray-500 { color: var(--muted-2) !important; }
+    [data-theme="dark"] .bg-white .text-gray-600 { color: var(--muted) !important; }
+    [data-theme="dark"] .bg-white .text-gray-700 { color: var(--muted) !important; }
     /* 검정 보더는 다크에서 ink 변수 따라가게 */
     [data-theme="dark"] .border-black { border-color: var(--ink) !important; }
     /* 회색 텍스트: 라이트는 그대로, 다크는 밝은 회색으로 끌어올림 */
