@@ -335,7 +335,15 @@
     [data-theme="dark"] [style*="background: var(--soft-g)"] *:not(.code-block):not(pre) { color: var(--ink) !important; }
 
     /* ===== section-tag 다크 색 강화 — 베이지 박스 + 진한 검정 글씨로 명도 차이 확보 ===== */
-    [data-theme="dark"] .section-tag { color: #0A0A0A; }
+    [data-theme="dark"] .section-tag { color: #0A0A0A !important; }
+
+    /* ===== 워커 카드 a/b/d 안 text-black 안전망 — 다크에서도 검정 유지 (mint/yellow/purple 배경 위 가독성) ===== */
+    .worker-card.worker-a .text-black,
+    .worker-card.worker-b .text-black,
+    .worker-card.worker-d .text-black,
+    .worker-card.worker-a .text-black *,
+    .worker-card.worker-b .text-black *,
+    .worker-card.worker-d .text-black * { color: #0A0A0A !important; }
     /* nb-card-sm가 paper 변수를 인라인으로 쓰는 경우 — 텍스트는 ink 변수 따라감(자동 대비) */
   </style>
 </head>
@@ -384,12 +392,12 @@
           <p class="text-lg font-medium text-gray-700">어려운 IT 용어 없이 한 줄씩만 설명드립니다.</p>
         </div>
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="nb-card p-6" style="background: var(--mint);">
+          <div class="nb-card p-6" style="background: var(--mint); color: #0A0A0A;">
             <div class="text-5xl mb-4">🗂️</div>
             <h3 class="font-black text-xl mb-3">흩어진 일이<br/>한 화면에</h3>
             <p class="font-medium leading-relaxed">매물 분석·광고문·고객 응대를 따로따로 챗GPT 켜서 하지 마세요. <strong>한 워크스페이스에 묶어 두고</strong> 필요할 때마다 꺼내 쓰는 도구입니다.</p>
           </div>
-          <div class="nb-card p-6" style="background: var(--yellow);">
+          <div class="nb-card p-6" style="background: var(--yellow); color: #0A0A0A;">
             <div class="text-5xl mb-4">🧠</div>
             <h3 class="font-black text-xl mb-3">매번 다시 설명<br/>안 해도 OK</h3>
             <p class="font-medium leading-relaxed">내 사무소가 어디인지, 단골 고객은 누구인지, 자주 쓰는 문구는 뭔지 — <strong>한 번 알려주면 계속 기억</strong>합니다.</p>
@@ -451,7 +459,7 @@
           </div>
 
           <!-- Step 3 -->
-          <div class="nb-card p-8 grid md:grid-cols-[120px_1fr] gap-6" style="background: var(--mint);">
+          <div class="nb-card p-8 grid md:grid-cols-[120px_1fr] gap-6" style="background: var(--mint); color: #0A0A0A;">
             <div class="font-black text-7xl text-white" style="text-shadow: 4px 4px 0 #0A0A0A;">03</div>
             <div>
               <h3 class="font-black text-2xl mb-4">매물 한 건 분석시켜 보기 <span class="text-base font-medium text-gray-600">(약 3분)</span></h3>
@@ -483,7 +491,7 @@
             <div>
               <h3 class="font-black text-xl mb-2">매물 분석</h3>
               <p class="font-medium leading-relaxed mb-3">주소 한 줄 → 시세·등기·강점/약점 리포트</p>
-              <span class="chip" style="background: var(--mint);">30분 → 3분</span>
+              <span class="chip" style="background: var(--mint); color: #0A0A0A;">30분 → 3분</span>
             </div>
           </div>
           <div class="nb-card p-6 flex gap-5 items-start">
@@ -491,7 +499,7 @@
             <div>
               <h3 class="font-black text-xl mb-2">광고문 작성</h3>
               <p class="font-medium leading-relaxed mb-3">분석 결과 → 블로그·당근·인스타 3채널 광고 카피</p>
-              <span class="chip" style="background: var(--yellow);">1시간 → 5분</span>
+              <span class="chip" style="background: var(--yellow); color: #0A0A0A;">1시간 → 5분</span>
             </div>
           </div>
           <div class="nb-card p-6 flex gap-5 items-start">
@@ -507,7 +515,7 @@
             <div>
               <h3 class="font-black text-xl mb-2">고객 보고서</h3>
               <p class="font-medium leading-relaxed mb-3">임장 메모 → 깔끔한 PDF용 보고서</p>
-              <span class="chip" style="background: var(--purple);">1시간 → 10분</span>
+              <span class="chip" style="background: var(--purple); color: #0A0A0A;">1시간 → 10분</span>
             </div>
           </div>
         </div>
@@ -757,11 +765,11 @@ PDF 출력용으로 깔끔하게.</pre>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 mb-12">
-          <div class="nb-card-sm p-6" style="background: var(--mint);">
+          <div class="nb-card-sm p-6" style="background: var(--mint); color: #0A0A0A;">
             <div class="font-black text-sm mb-2">▶ 일주일 후</div>
             <p class="font-medium">4가지 진입점 중 본인 사무소에 가장 도움 되는 1가지를 정해서 <strong>하루 1번씩 7일 연속 사용</strong></p>
           </div>
-          <div class="nb-card-sm p-6" style="background: var(--yellow);">
+          <div class="nb-card-sm p-6" style="background: var(--yellow); color: #0A0A0A;">
             <div class="font-black text-sm mb-2">▶ 한 달 후</div>
             <p class="font-medium">본인만의 "자주 쓰는 프롬프트" <strong>5개가 자연스럽게 만들어집니다</strong></p>
           </div>
