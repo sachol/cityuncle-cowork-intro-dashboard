@@ -297,19 +297,37 @@
     /* BEFORE/AFTER 라벨도 다크에서 한 단계 밝게 */
     [data-theme="dark"] .text-red-600 { color: #FCA5A5 !important; }
     [data-theme="dark"] .text-green-700 { color: #86EFAC !important; }
-    /* 컬러 강조 배경(인라인 var) 위 텍스트는 라이트/다크 모두 검정 고정 */
-    [style*="--yellow"]:not(.theme-toggle):not(.nb-btn-primary),
-    [style*="--mint"],
-    [style*="--purple"] { color: #0A0A0A; }
-    /* 패스텔 인라인 배경 위 텍스트도 검정 고정 (다크에서는 위 변수가 어두워져 자동 대비) */
-    [style*="--soft-y"],
-    [style*="--soft-y-2"],
-    [style*="--soft-p"],
-    [style*="--soft-g"] { color: #0A0A0A; }
-    [data-theme="dark"] [style*="--soft-y"],
-    [data-theme="dark"] [style*="--soft-y-2"],
-    [data-theme="dark"] [style*="--soft-p"],
-    [data-theme="dark"] [style*="--soft-g"] { color: var(--ink); }
+    /* ===== 컬러풀 인라인 배경 카드 안 텍스트 — 라이트·다크 무관 검정 고정 =====
+       * 패턴 정밀화: 'background: var(--XX)' 인라인만 매치 (border-color 등 다른 속성은 제외)
+       * 자식 매치 추가: 카드 안 모든 텍스트 요소 검정 강제 (text-gray-* 같은 클래스가 이기는 문제 해결)
+       * 인라인 color (예: 핑크 라벨)은 specificity 우선으로 자동 보존됨 (!important 안 씀)
+    */
+    [style*="background: var(--mint)"],
+    [style*="background: var(--mint)"] *,
+    [style*="background: var(--yellow)"]:not(.theme-toggle):not(.nb-btn-primary),
+    [style*="background: var(--yellow)"]:not(.theme-toggle):not(.nb-btn-primary) *,
+    [style*="background: var(--purple)"],
+    [style*="background: var(--purple)"] * { color: #0A0A0A; }
+
+    /* ===== 패스텔 인라인 배경 (라이트 모드) — 검정 고정 ===== */
+    [style*="background: var(--soft-y)"],
+    [style*="background: var(--soft-y)"] *,
+    [style*="background: var(--soft-y-2)"],
+    [style*="background: var(--soft-y-2)"] *,
+    [style*="background: var(--soft-p)"],
+    [style*="background: var(--soft-p)"] *,
+    [style*="background: var(--soft-g)"],
+    [style*="background: var(--soft-g)"] * { color: #0A0A0A; }
+
+    /* ===== 다크 모드: 패스텔 변수가 어두운 톤으로 자동 전환되므로 텍스트도 ink로 ===== */
+    [data-theme="dark"] [style*="background: var(--soft-y)"],
+    [data-theme="dark"] [style*="background: var(--soft-y)"] *,
+    [data-theme="dark"] [style*="background: var(--soft-y-2)"],
+    [data-theme="dark"] [style*="background: var(--soft-y-2)"] *,
+    [data-theme="dark"] [style*="background: var(--soft-p)"],
+    [data-theme="dark"] [style*="background: var(--soft-p)"] *,
+    [data-theme="dark"] [style*="background: var(--soft-g)"],
+    [data-theme="dark"] [style*="background: var(--soft-g)"] * { color: var(--ink); }
     /* nb-card-sm가 paper 변수를 인라인으로 쓰는 경우 — 텍스트는 ink 변수 따라감(자동 대비) */
   </style>
 </head>
