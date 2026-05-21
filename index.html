@@ -284,14 +284,33 @@
     .sr-only.focus\:not-sr-only:focus { position: static; width: auto; height: auto; padding: 14px 24px; margin: 0; overflow: visible; clip: auto; white-space: normal; }
 
     /* ===== Tailwind 색상 클래스의 라이트/다크 보정 ===== */
-    /* bg-white 클래스는 다크에서 카드 톤으로 + 내부 텍스트도 ink로 (specificity 0,2,1 + !important로 컬러 카드 룰보다 우선) */
-    [data-theme="dark"] .bg-white { background-color: var(--card) !important; }
-    [data-theme="dark"] .bg-white,
-    [data-theme="dark"] .bg-white *:not(.code-block):not(pre) { color: var(--ink) !important; }
-    /* bg-white 안의 회색 라벨은 다크에서 밝은 회색으로 (인라인 color는 보존) */
-    [data-theme="dark"] .bg-white .text-gray-500 { color: var(--muted-2) !important; }
-    [data-theme="dark"] .bg-white .text-gray-600 { color: var(--muted) !important; }
-    [data-theme="dark"] .bg-white .text-gray-700 { color: var(--muted) !important; }
+    /* bg-white 일관 규칙:
+       - section.bg-white (큰 섹션 배경): 다크에서 paper 톤으로 자연 전환 (글씨 ink 베이지 inheritance)
+       - div.bg-white (작은 박스): 라이트·다크 무관 흰 배경 + 검정 글씨 유지 (사용자 일관 규칙)
+       - 자식 매치 룰 제거 → inheritance로 자연 처리 → section-tag 등 자체 색 가진 자식 침범 안 함
+    */
+    [data-theme="dark"] section.bg-white {
+      background-color: var(--paper) !important;
+    }
+    .bg-white:not(section) {
+      background-color: #FFFFFF;
+      color: #1A1A1A;
+    }
+    [data-theme="dark"] .bg-white:not(section) {
+      background-color: #FFFFFF !important;
+      color: #1A1A1A !important;
+    }
+    /* div.bg-white 안 자식까지 검정 강제 (컬러 카드 부모의 흰글씨 자식 매치를 specificity로 이김) */
+    .bg-white:not(section) *:not(.code-block):not(pre):not(.section-tag) {
+      color: #1A1A1A !important;
+    }
+    /* div.bg-white 안의 회색 라벨은 흰 배경에서도 그대로 회색 (가독성 OK) */
+    .bg-white:not(section) .text-gray-500 { color: #6B7280 !important; }
+    .bg-white:not(section) .text-gray-600 { color: #4B5563 !important; }
+    .bg-white:not(section) .text-gray-700 { color: #374151 !important; }
+    /* section-tag는 어떤 부모 안이든 자체 색 보호 (specificity 강화) */
+    .section-tag { color: var(--paper) !important; }
+    [data-theme="dark"] .section-tag { color: #1A1A1A !important; }
     /* 검정 보더는 다크에서 ink 변수 따라가게 */
     [data-theme="dark"] .border-black { border-color: var(--ink) !important; }
     /* 회색 텍스트: 라이트는 그대로, 다크는 밝은 회색으로 끌어올림 */
@@ -637,28 +656,28 @@
             <p class="font-medium text-gray-300 leading-relaxed">외근·임장 중에 폰으로 한 줄 보내면, 사무소 Claude Desktop이 알아서 실행하고 <strong>완성된 결과를 다시 폰으로</strong> 보내줍니다. 결과 받으러 사무소에 돌아갈 필요가 없습니다.</p>
           </div>
 
-          <!-- 흐름 3단계 시각화 -->
+          <!-- 흐름 3단계 시각화 (dispatch 검정 배경 안 — 어두운 톤 + 흰글씨) -->
           <div class="grid md:grid-cols-3 gap-4 mb-8">
-            <div class="bg-white text-black p-5 rounded-2xl border-[3px]" style="border-color: var(--yellow);">
+            <div class="p-5 rounded-2xl border-[3px]" style="background: rgba(255,255,255,0.06); color: #FFFFFF; border-color: var(--yellow);">
               <div class="text-3xl mb-2">📱</div>
-              <div class="font-black text-sm mb-1" style="color: var(--pink);">1. 폰에서 보내기</div>
-              <p class="font-medium text-sm text-black">외근·임장 중에 Claude 모바일 앱으로 작업 한 줄 작성</p>
+              <div class="font-black text-sm mb-1" style="color: var(--yellow);">1. 폰에서 보내기</div>
+              <p class="font-medium text-sm">외근·임장 중에 Claude 모바일 앱으로 작업 한 줄 작성</p>
             </div>
-            <div class="bg-white text-black p-5 rounded-2xl border-[3px]" style="border-color: var(--yellow);">
+            <div class="p-5 rounded-2xl border-[3px]" style="background: rgba(255,255,255,0.06); color: #FFFFFF; border-color: var(--yellow);">
               <div class="text-3xl mb-2">💻</div>
-              <div class="font-black text-sm mb-1" style="color: var(--pink);">2. 데스크탑이 실행</div>
-              <p class="font-medium text-sm text-black">사무소 컴퓨터의 Claude Desktop이 파일·이메일·도구에 접근해 자동 처리</p>
+              <div class="font-black text-sm mb-1" style="color: var(--yellow);">2. 데스크탑이 실행</div>
+              <p class="font-medium text-sm">사무소 컴퓨터의 Claude Desktop이 파일·이메일·도구에 접근해 자동 처리</p>
             </div>
-            <div class="bg-white text-black p-5 rounded-2xl border-[3px]" style="border-color: var(--yellow);">
+            <div class="p-5 rounded-2xl border-[3px]" style="background: rgba(255,255,255,0.06); color: #FFFFFF; border-color: var(--yellow);">
               <div class="text-3xl mb-2">📲</div>
-              <div class="font-black text-sm mb-1" style="color: var(--pink);">3. 폰으로 결과</div>
-              <p class="font-medium text-sm text-black">완성된 결과(분석·광고·응대·보고서)가 폰으로 도착</p>
+              <div class="font-black text-sm mb-1" style="color: var(--yellow);">3. 폰으로 결과</div>
+              <p class="font-medium text-sm">완성된 결과(분석·광고·응대·보고서)가 폰으로 도착</p>
             </div>
           </div>
 
-          <div class="bg-white text-black p-6 rounded-2xl border-[3px] mb-6" style="border-color: var(--yellow);">
-            <div class="font-black text-sm mb-2 text-gray-500">🚗 임장 가는 차 안 · 폰 입력 예시</div>
-            <pre class="font-mono text-sm whitespace-pre-wrap text-black">광화문 한일아파트 84㎡, 매매 18억 매물.
+          <div class="p-6 rounded-2xl border-[3px] mb-6" style="background: rgba(255,255,255,0.06); color: #FFFFFF; border-color: var(--yellow);">
+            <div class="font-black text-sm mb-2" style="color: rgba(255,255,255,0.75);">🚗 임장 가는 차 안 · 폰 입력 예시</div>
+            <pre class="font-mono text-sm whitespace-pre-wrap" style="color: #FFFFFF;">광화문 한일아파트 84㎡, 매매 18억 매물.
 오후 임장 예정, 고객은 30대 신혼부부.
 시세 분석·광고 카피·임장 직전 카톡 안내·임장 후 보고서 템플릿
 4가지 한 번에 만들어서 준비해 둬.</pre>
