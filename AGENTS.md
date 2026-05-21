@@ -9,7 +9,7 @@
 ## 정의된 agent (3종)
 
 ### 1. `cowork-curator`
-**역할**: Claude Cowork(claude.ai의 Projects/협업 워크스페이스) 공식 문서·블로그·릴리스 노트를 읽고, **공인중개사 도메인에 맞는 사용 사례로 번역**.
+**역할**: Claude Cowork(**Claude Desktop 앱 전용** Projects/협업 워크스페이스, Dispatch 베타 포함) 공식 문서·도움말·릴리스 노트를 읽고, **공인중개사 도메인에 맞는 사용 사례로 번역**.
 
 **입력**: 공식 docs URL, 기능 이름(예: "System Instructions", "Projects", "Artifacts", "Files")
 **출력**: 공인중개사 1인 사무소가 즉시 따라할 수 있는 **3줄짜리 한국어 사용 사례**
