@@ -33,37 +33,39 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
+    /* ===== 에디토리얼 머스타드 팔레트 (저채도·고급·네오브루탈 보더/그림자 유지) ===== */
     :root {
-      --ink: #0A0A0A;
-      --paper: #FFFCEF;
-      --yellow: #FFD600;
-      --pink: #FF4D8D;
-      --blue: #3B82F6;
-      --mint: #A7F3D0;
-      --purple: #C4B5FD;
-      --card: #FFFFFF;
-      --muted: #4B5563;
-      --muted-2: #6B7280;
-      --soft-y: #FEF9C3;
-      --soft-y-2: #FEFCE8;
-      --soft-p: #FFF1F2;
-      --soft-g: #F0FDF4;
-      --code-inline-bg: #F3F4F6;
-      --section-divider: #0A0A0A;
+      --ink: #1A1A1A;            /* 부드러운 검정 (#0A 보다 한 단계 부드러움) */
+      --paper: #F5F1EA;          /* 따뜻한 베이지 페이퍼 */
+      --yellow: #C9A227;         /* 머스타드 골드 */
+      --pink: #C97B63;           /* 테라코타 */
+      --blue: #3B82F6;           /* (예비, 미사용) */
+      --mint: #6F8B6D;           /* 세이지 그린 */
+      --purple: #8A7AA8;         /* 더스티 라벤더 */
+      --card: #FFFFFF;           /* 순백 카드 */
+      --muted: #6B6862;          /* 가벼운 회색 본문 */
+      --muted-2: #8C8983;
+      --soft-y: #F4ECD8;         /* 머스타드 톤다운 (팁 박스) */
+      --soft-y-2: #FAF5E5;       /* case 1 펼침 */
+      --soft-p: #F5DDD4;         /* case 2 펼침 (테라코타 톤) */
+      --soft-g: #DCE5DA;         /* case 3 펼침 (세이지 톤) */
+      --code-inline-bg: #EEEAE2; /* 인라인 코드 배경 */
+      --section-divider: #1A1A1A;
     }
 
     [data-theme="dark"] {
-      --ink: #F2F0E5;
-      --paper: #14121A;
-      --card: #20202A;
-      --muted: #C8C6D4;
-      --muted-2: #A8A6B8;
-      --soft-y: #3D3618;
-      --soft-y-2: #2E2A14;
-      --soft-p: #3A1C24;
-      --soft-g: #1A2A20;
-      --code-inline-bg: #2A2A35;
-      --section-divider: #F2F0E5;
+      --ink: #E8E4DC;            /* 오프화이트 */
+      --paper: #1A1815;          /* 짙은 브라운/차콜 */
+      --card: #252320;           /* 다크 카드 */
+      --muted: #9E9A92;
+      --muted-2: #7E7B73;
+      --soft-y: #3D3318;
+      --soft-y-2: #2E2614;
+      --soft-p: #3A211C;
+      --soft-g: #1F2A1F;
+      --code-inline-bg: #2A2823;
+      --section-divider: #E8E4DC;
+      /* 강조 4색(머스타드/테라코타/세이지/라벤더)은 저채도라 라이트/다크 양쪽에 자연스러우므로 변수 그대로 유지 */
     }
 
     * { font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
@@ -104,7 +106,7 @@
     }
     .nb-btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
     .nb-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
-    .nb-btn-primary { background: var(--yellow); color: #0A0A0A; }
+    .nb-btn-primary { background: var(--yellow); color: #1A1A1A; }
     .nb-btn-secondary { background: var(--card); color: var(--ink); }
 
     /* 테마 토글 버튼 */
@@ -212,10 +214,10 @@
     .reveal { display: none; }
     .reveal.open { display: block; }
 
-    /* 코드 블록 — 라이트/다크/컬러카드 부모 무관하게 항상 검정 배경 + mint 글씨 강제 */
+    /* 코드 블록 — 라이트/다크/컬러카드 부모 무관하게 항상 짙은 차콜 배경 + 따뜻한 오프화이트 글씨 (IDE 톤) */
     .code-block {
-      background: #0A0A0A !important;
-      color: var(--mint) !important;
+      background: #1A1815 !important;
+      color: #E8E4DC !important;
       padding: 16px 20px;
       border-radius: 12px;
       font-family: 'JetBrains Mono', monospace;
@@ -223,11 +225,11 @@
       line-height: 1.6;
       white-space: pre-wrap;
       word-break: break-word;
-      border: 2px solid #0A0A0A;
+      border: 2px solid #1A1815;
     }
     .code-block * {
       background: transparent !important;
-      color: var(--mint) !important;
+      color: #E8E4DC !important;
     }
 
     /* 체크리스트 */
@@ -243,7 +245,7 @@
       transition: background 0.2s ease;
       color: var(--ink);
     }
-    .check-item.done { background: var(--mint); color: #0A0A0A; }
+    .check-item.done { background: var(--mint); color: #1A1A1A; }
     .check-item.done p { text-decoration: line-through; opacity: 0.7; }
     .check-item .box {
       width: 24px;
@@ -255,7 +257,7 @@
       position: relative;
       margin-top: 2px;
     }
-    .check-item.done .box { background: #0A0A0A; }
+    .check-item.done .box { background: #1A1A1A; }
     .check-item.done .box::after {
       content: '✓';
       color: var(--yellow);
@@ -268,7 +270,7 @@
     }
 
     /* 칩(시간 절약 뱃지) */
-    .chip { display: inline-block; padding: 4px 12px; border: 2px solid var(--ink); border-radius: 999px; font-weight: 900; font-size: 13px; color: #0A0A0A; }
+    .chip { display: inline-block; padding: 4px 12px; border: 2px solid var(--ink); border-radius: 999px; font-weight: 900; font-size: 13px; color: #1A1A1A; }
 
     /* 코드 인라인 */
     code:not(pre code) { background: var(--code-inline-bg); padding: 2px 8px; border-radius: 6px; font-size: 0.9em; color: var(--ink); }
@@ -301,18 +303,29 @@
     /* BEFORE/AFTER 라벨도 다크에서 한 단계 밝게 */
     [data-theme="dark"] .text-red-600 { color: #FCA5A5 !important; }
     [data-theme="dark"] .text-green-700 { color: #86EFAC !important; }
-    /* ===== 컬러풀 인라인 배경 카드 안 텍스트 — 라이트·다크 무관 검정 고정 =====
-       * 패턴 정밀화: 'background: var(--XX)' 인라인만 매치 (border-color 등 다른 속성은 제외)
-       * 자식 매치 + !important: 다른 룰(text-gray-*, body color)을 확실히 이김
-       * 제외: .code-block, pre — 코드블록은 검정 배경 + mint 글씨 자체 룰 유지
-       * 인라인 color는 specificity 1,0,0,0이라 일반 인라인은 !important에 짐 → 인라인 보존이 필요한 곳(pink 라벨 등)은 .bg-white 안에 있어 별도 룰로 처리됨
+    /* ===== 컬러 카드별 텍스트 색 — 에디토리얼 머스타드 팔레트 기준 =====
+       * 머스타드 (구 yellow): 밝은 색 → 검정 글씨
+       * 테라코타 (구 pink): 중간 색 → 흰 글씨
+       * 세이지 (구 mint): 중간 어두운 색 → 흰 글씨
+       * 더스티 라벤더 (구 purple): 중간 어두운 색 → 흰 글씨
+       * 라이트·다크 양쪽 모두 동일 (저채도라 가독성 일관됨)
+       * 제외: .code-block, pre — 코드블록은 자체 룰
     */
+    [style*="background: var(--yellow)"]:not(.theme-toggle):not(.nb-btn-primary),
+    [style*="background: var(--yellow)"]:not(.theme-toggle):not(.nb-btn-primary) *:not(.code-block):not(pre) { color: #1A1A1A; }
+
+    [style*="background: var(--pink)"],
+    [style*="background: var(--pink)"] *:not(.code-block):not(pre),
     [style*="background: var(--mint)"],
     [style*="background: var(--mint)"] *:not(.code-block):not(pre),
-    [style*="background: var(--yellow)"]:not(.theme-toggle):not(.nb-btn-primary),
-    [style*="background: var(--yellow)"]:not(.theme-toggle):not(.nb-btn-primary) *:not(.code-block):not(pre),
     [style*="background: var(--purple)"],
-    [style*="background: var(--purple)"] *:not(.code-block):not(pre) { color: #0A0A0A !important; }
+    [style*="background: var(--purple)"] *:not(.code-block):not(pre) { color: #FFFFFF; }
+
+    /* worker-card 클래스로 background 설정한 곳도 동일 처리 */
+    .worker-a, .worker-a * { color: #FFFFFF; }      /* 세이지 */
+    .worker-b, .worker-b * { color: #1A1A1A; }      /* 머스타드 */
+    .worker-c, .worker-c * { color: #FFFFFF; }      /* 테라코타 */
+    .worker-d, .worker-d * { color: #FFFFFF; }      /* 더스티 라벤더 */
 
     /* ===== 패스텔 인라인 배경 (라이트 모드) — 검정 고정, 코드블록 제외 ===== */
     [style*="background: var(--soft-y)"],
@@ -322,7 +335,7 @@
     [style*="background: var(--soft-p)"],
     [style*="background: var(--soft-p)"] *:not(.code-block):not(pre),
     [style*="background: var(--soft-g)"],
-    [style*="background: var(--soft-g)"] *:not(.code-block):not(pre) { color: #0A0A0A; }
+    [style*="background: var(--soft-g)"] *:not(.code-block):not(pre) { color: #1A1A1A; }
 
     /* ===== 다크 모드: 패스텔 변수가 어두운 톤으로 자동 전환되므로 텍스트도 ink로 ===== */
     [data-theme="dark"] [style*="background: var(--soft-y)"],
@@ -335,15 +348,13 @@
     [data-theme="dark"] [style*="background: var(--soft-g)"] *:not(.code-block):not(pre) { color: var(--ink) !important; }
 
     /* ===== section-tag 다크 색 강화 — 베이지 박스 + 진한 검정 글씨로 명도 차이 확보 ===== */
-    [data-theme="dark"] .section-tag { color: #0A0A0A !important; }
+    [data-theme="dark"] .section-tag { color: #1A1A1A !important; }
 
-    /* ===== 워커 카드 a/b/d 안 text-black 안전망 — 다크에서도 검정 유지 (mint/yellow/purple 배경 위 가독성) ===== */
-    .worker-card.worker-a .text-black,
-    .worker-card.worker-b .text-black,
-    .worker-card.worker-d .text-black,
-    .worker-card.worker-a .text-black *,
-    .worker-card.worker-b .text-black *,
-    .worker-card.worker-d .text-black * { color: #0A0A0A !important; }
+    /* ===== 워커 카드의 Tailwind 클래스 .text-black을 색 룰로 덮음 (worker-a/c/d=흰, worker-b=검정) ===== */
+    .worker-a .text-black, .worker-a .text-black *,
+    .worker-c .text-black, .worker-c .text-black *,
+    .worker-d .text-black, .worker-d .text-black * { color: #FFFFFF !important; }
+    .worker-b .text-black, .worker-b .text-black * { color: #1A1A1A !important; }
     /* nb-card-sm가 paper 변수를 인라인으로 쓰는 경우 — 텍스트는 ink 변수 따라감(자동 대비) */
   </style>
 </head>
@@ -363,7 +374,7 @@
       </div>
       <h1 class="font-black text-4xl md:text-7xl leading-tight mb-6 kinetic">
         공인중개사 업무,<br/>
-        <span class="inline-block border-[3px] border-black px-3 my-1" style="background: var(--yellow); box-shadow: 6px 6px 0 #0A0A0A; color: #0A0A0A;">반으로 줄이는 첫걸음.</span><br/>
+        <span class="inline-block border-[3px] border-black px-3 my-1" style="background: var(--yellow); box-shadow: 6px 6px 0 #1A1A1A; color: #1A1A1A;">반으로 줄이는 첫걸음.</span><br/>
         Claude Cowork 시작하기.
       </h1>
       <p class="text-lg md:text-xl font-medium max-w-3xl mb-10 leading-relaxed">
@@ -392,12 +403,12 @@
           <p class="text-lg font-medium text-gray-700">어려운 IT 용어 없이 한 줄씩만 설명드립니다.</p>
         </div>
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="nb-card p-6" style="background: var(--mint); color: #0A0A0A;">
+          <div class="nb-card p-6" style="background: var(--mint); color: #FFFFFF;">
             <div class="text-5xl mb-4">🗂️</div>
             <h3 class="font-black text-xl mb-3">흩어진 일이<br/>한 화면에</h3>
             <p class="font-medium leading-relaxed">매물 분석·광고문·고객 응대를 따로따로 챗GPT 켜서 하지 마세요. <strong>한 워크스페이스에 묶어 두고</strong> 필요할 때마다 꺼내 쓰는 도구입니다.</p>
           </div>
-          <div class="nb-card p-6" style="background: var(--yellow); color: #0A0A0A;">
+          <div class="nb-card p-6" style="background: var(--yellow); color: #1A1A1A;">
             <div class="text-5xl mb-4">🧠</div>
             <h3 class="font-black text-xl mb-3">매번 다시 설명<br/>안 해도 OK</h3>
             <p class="font-medium leading-relaxed">내 사무소가 어디인지, 단골 고객은 누구인지, 자주 쓰는 문구는 뭔지 — <strong>한 번 알려주면 계속 기억</strong>합니다.</p>
@@ -424,7 +435,7 @@
         <div class="space-y-8">
           <!-- Step 1 -->
           <div class="nb-card p-8 grid md:grid-cols-[120px_1fr] gap-6">
-            <div class="font-black text-7xl" style="color: var(--yellow); text-shadow: 4px 4px 0 #0A0A0A;">01</div>
+            <div class="font-black text-7xl" style="color: var(--yellow); text-shadow: 4px 4px 0 #1A1A1A;">01</div>
             <div>
               <h3 class="font-black text-2xl mb-4">Claude Desktop 설치 + 유료 플랜 <span class="text-base font-medium text-gray-500">(약 5분)</span></h3>
               <ol class="list-decimal list-outside ml-5 space-y-2 font-medium">
@@ -440,7 +451,7 @@
 
           <!-- Step 2 -->
           <div class="nb-card p-8 grid md:grid-cols-[120px_1fr] gap-6">
-            <div class="font-black text-7xl" style="color: var(--pink); text-shadow: 4px 4px 0 #0A0A0A;">02</div>
+            <div class="font-black text-7xl" style="color: var(--pink); text-shadow: 4px 4px 0 #1A1A1A;">02</div>
             <div>
               <h3 class="font-black text-2xl mb-4">"내 부동산 사무소" 작업 공간 만들기 <span class="text-base font-medium text-gray-500">(약 2분)</span></h3>
               <ol class="list-decimal list-outside ml-5 space-y-2 font-medium">
@@ -459,8 +470,8 @@
           </div>
 
           <!-- Step 3 -->
-          <div class="nb-card p-8 grid md:grid-cols-[120px_1fr] gap-6" style="background: var(--mint); color: #0A0A0A;">
-            <div class="font-black text-7xl text-white" style="text-shadow: 4px 4px 0 #0A0A0A;">03</div>
+          <div class="nb-card p-8 grid md:grid-cols-[120px_1fr] gap-6" style="background: var(--mint); color: #FFFFFF;">
+            <div class="font-black text-7xl text-white" style="text-shadow: 4px 4px 0 #1A1A1A;">03</div>
             <div>
               <h3 class="font-black text-2xl mb-4">매물 한 건 분석시켜 보기 <span class="text-base font-medium text-gray-600">(약 3분)</span></h3>
               <p class="font-medium mb-3">방금 만든 Project 안에서 새 작업을 만들고, 다음을 그대로 붙여넣어 보세요:</p>
@@ -491,7 +502,7 @@
             <div>
               <h3 class="font-black text-xl mb-2">매물 분석</h3>
               <p class="font-medium leading-relaxed mb-3">주소 한 줄 → 시세·등기·강점/약점 리포트</p>
-              <span class="chip" style="background: var(--mint); color: #0A0A0A;">30분 → 3분</span>
+              <span class="chip" style="background: var(--mint); color: #FFFFFF;">30분 → 3분</span>
             </div>
           </div>
           <div class="nb-card p-6 flex gap-5 items-start">
@@ -499,7 +510,7 @@
             <div>
               <h3 class="font-black text-xl mb-2">광고문 작성</h3>
               <p class="font-medium leading-relaxed mb-3">분석 결과 → 블로그·당근·인스타 3채널 광고 카피</p>
-              <span class="chip" style="background: var(--yellow); color: #0A0A0A;">1시간 → 5분</span>
+              <span class="chip" style="background: var(--yellow); color: #1A1A1A;">1시간 → 5분</span>
             </div>
           </div>
           <div class="nb-card p-6 flex gap-5 items-start">
@@ -515,7 +526,7 @@
             <div>
               <h3 class="font-black text-xl mb-2">고객 보고서</h3>
               <p class="font-medium leading-relaxed mb-3">임장 메모 → 깔끔한 PDF용 보고서</p>
-              <span class="chip" style="background: var(--purple); color: #0A0A0A;">1시간 → 10분</span>
+              <span class="chip" style="background: var(--purple); color: #FFFFFF;">1시간 → 10분</span>
             </div>
           </div>
         </div>
@@ -619,7 +630,7 @@
         </div>
 
         <!-- ============ DISPATCH DEMO ============ -->
-        <div id="dispatch" class="nb-card p-6 md:p-12" style="background: #0A0A0A; color: white; border-color: #0A0A0A; box-shadow: 8px 8px 0 #0A0A0A;">
+        <div id="dispatch" class="nb-card p-6 md:p-12" style="background: #1A1A1A; color: white; border-color: #1A1A1A; box-shadow: 8px 8px 0 #1A1A1A;">
           <div class="mb-6">
             <span class="section-tag" style="background: var(--yellow); color: var(--ink);">🔥 CASE 04 · DISPATCH (베타)</span>
             <h3 class="font-black text-3xl md:text-4xl mt-4 mb-3">📱 폰에서 보내면 → 💻 사무소 컴퓨터가 처리 → 📲 폰으로 결과</h3>
@@ -733,7 +744,7 @@ PDF 출력용으로 깔끔하게.</pre>
             ⚠️ <strong>Dispatch는 현재 베타(research preview)</strong>입니다. 사무소 컴퓨터가 켜져 있고 Claude Desktop 앱이 실행 중이어야 작동합니다. 절전·앱 닫힘 상태에서는 폰에서 보낸 지시가 처리되지 않습니다. 파일 데이터 추출·메일 요약·문서 작성 등은 안정적이고, 일부 서드파티 앱 조작은 아직 불안정합니다.
           </div>
 
-          <div id="dispatch-done" class="reveal mt-8 p-5 rounded-xl" style="background: var(--yellow); color: #0A0A0A; border: 3px solid #0A0A0A; box-shadow: 6px 6px 0 #0A0A0A;">
+          <div id="dispatch-done" class="reveal mt-8 p-5 rounded-xl" style="background: var(--yellow); color: #1A1A1A; border: 3px solid #1A1A1A; box-shadow: 6px 6px 0 #1A1A1A;">
             <p class="font-bold leading-relaxed">💡 <strong>공식 정의</strong> (Anthropic Cowork): <em>"Message from your phone. Claude works on your computer. You get the result."</em><br/>폰으로 보내고 · 컴퓨터가 일하고 · 결과를 받는 패턴 — 임장·외근이 많은 공인중개사 업무에 가장 잘 맞는 사용법입니다.</p>
           </div>
         </div>
@@ -765,11 +776,11 @@ PDF 출력용으로 깔끔하게.</pre>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 mb-12">
-          <div class="nb-card-sm p-6" style="background: var(--mint); color: #0A0A0A;">
+          <div class="nb-card-sm p-6" style="background: var(--mint); color: #FFFFFF;">
             <div class="font-black text-sm mb-2">▶ 일주일 후</div>
             <p class="font-medium">4가지 진입점 중 본인 사무소에 가장 도움 되는 1가지를 정해서 <strong>하루 1번씩 7일 연속 사용</strong></p>
           </div>
-          <div class="nb-card-sm p-6" style="background: var(--yellow); color: #0A0A0A;">
+          <div class="nb-card-sm p-6" style="background: var(--yellow); color: #1A1A1A;">
             <div class="font-black text-sm mb-2">▶ 한 달 후</div>
             <p class="font-medium">본인만의 "자주 쓰는 프롬프트" <strong>5개가 자연스럽게 만들어집니다</strong></p>
           </div>
@@ -786,7 +797,7 @@ PDF 출력용으로 깔끔하게.</pre>
     </section>
 
     <!-- ============ FOOTER ============ -->
-    <footer class="py-12" style="background: #0A0A0A; color: var(--yellow);">
+    <footer class="py-12" style="background: #1A1A1A; color: var(--yellow);">
       <div class="max-w-6xl mx-auto px-6">
         <p class="font-medium leading-relaxed max-w-3xl">
           이 페이지는 <strong>신화 대표가 직접 만든 강의 자료</strong>입니다.<br/>
