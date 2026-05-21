@@ -212,10 +212,10 @@
     .reveal { display: none; }
     .reveal.open { display: block; }
 
-    /* 코드 블록 (라이트/다크 무관하게 검정 배경 + mint 글씨) */
+    /* 코드 블록 — 라이트/다크/컬러카드 부모 무관하게 항상 검정 배경 + mint 글씨 강제 */
     .code-block {
-      background: #0A0A0A;
-      color: var(--mint);
+      background: #0A0A0A !important;
+      color: var(--mint) !important;
       padding: 16px 20px;
       border-radius: 12px;
       font-family: 'JetBrains Mono', monospace;
@@ -224,6 +224,10 @@
       white-space: pre-wrap;
       word-break: break-word;
       border: 2px solid #0A0A0A;
+    }
+    .code-block * {
+      background: transparent !important;
+      color: var(--mint) !important;
     }
 
     /* 체크리스트 */
@@ -278,10 +282,10 @@
     .sr-only.focus\:not-sr-only:focus { position: static; width: auto; height: auto; padding: 14px 24px; margin: 0; overflow: visible; clip: auto; white-space: normal; }
 
     /* ===== Tailwind 색상 클래스의 라이트/다크 보정 ===== */
-    /* bg-white 클래스는 다크에서 카드 톤으로 + 내부 텍스트도 ink로 (어두운 카드 위 검정 글씨 가독성 문제 방지) */
+    /* bg-white 클래스는 다크에서 카드 톤으로 + 내부 텍스트도 ink로 (specificity 0,2,1 + !important로 컬러 카드 룰보다 우선) */
     [data-theme="dark"] .bg-white { background-color: var(--card) !important; }
     [data-theme="dark"] .bg-white,
-    [data-theme="dark"] .bg-white * { color: var(--ink); }
+    [data-theme="dark"] .bg-white *:not(.code-block):not(pre) { color: var(--ink) !important; }
     /* bg-white 안의 회색 라벨은 다크에서 밝은 회색으로 (인라인 color는 보존) */
     [data-theme="dark"] .bg-white .text-gray-500 { color: var(--muted-2) !important; }
     [data-theme="dark"] .bg-white .text-gray-600 { color: var(--muted) !important; }
@@ -299,35 +303,39 @@
     [data-theme="dark"] .text-green-700 { color: #86EFAC !important; }
     /* ===== 컬러풀 인라인 배경 카드 안 텍스트 — 라이트·다크 무관 검정 고정 =====
        * 패턴 정밀화: 'background: var(--XX)' 인라인만 매치 (border-color 등 다른 속성은 제외)
-       * 자식 매치 추가: 카드 안 모든 텍스트 요소 검정 강제 (text-gray-* 같은 클래스가 이기는 문제 해결)
-       * 인라인 color (예: 핑크 라벨)은 specificity 우선으로 자동 보존됨 (!important 안 씀)
+       * 자식 매치 + !important: 다른 룰(text-gray-*, body color)을 확실히 이김
+       * 제외: .code-block, pre — 코드블록은 검정 배경 + mint 글씨 자체 룰 유지
+       * 인라인 color는 specificity 1,0,0,0이라 일반 인라인은 !important에 짐 → 인라인 보존이 필요한 곳(pink 라벨 등)은 .bg-white 안에 있어 별도 룰로 처리됨
     */
     [style*="background: var(--mint)"],
-    [style*="background: var(--mint)"] *,
+    [style*="background: var(--mint)"] *:not(.code-block):not(pre),
     [style*="background: var(--yellow)"]:not(.theme-toggle):not(.nb-btn-primary),
-    [style*="background: var(--yellow)"]:not(.theme-toggle):not(.nb-btn-primary) *,
+    [style*="background: var(--yellow)"]:not(.theme-toggle):not(.nb-btn-primary) *:not(.code-block):not(pre),
     [style*="background: var(--purple)"],
-    [style*="background: var(--purple)"] * { color: #0A0A0A; }
+    [style*="background: var(--purple)"] *:not(.code-block):not(pre) { color: #0A0A0A !important; }
 
-    /* ===== 패스텔 인라인 배경 (라이트 모드) — 검정 고정 ===== */
+    /* ===== 패스텔 인라인 배경 (라이트 모드) — 검정 고정, 코드블록 제외 ===== */
     [style*="background: var(--soft-y)"],
-    [style*="background: var(--soft-y)"] *,
+    [style*="background: var(--soft-y)"] *:not(.code-block):not(pre),
     [style*="background: var(--soft-y-2)"],
-    [style*="background: var(--soft-y-2)"] *,
+    [style*="background: var(--soft-y-2)"] *:not(.code-block):not(pre),
     [style*="background: var(--soft-p)"],
-    [style*="background: var(--soft-p)"] *,
+    [style*="background: var(--soft-p)"] *:not(.code-block):not(pre),
     [style*="background: var(--soft-g)"],
-    [style*="background: var(--soft-g)"] * { color: #0A0A0A; }
+    [style*="background: var(--soft-g)"] *:not(.code-block):not(pre) { color: #0A0A0A; }
 
     /* ===== 다크 모드: 패스텔 변수가 어두운 톤으로 자동 전환되므로 텍스트도 ink로 ===== */
     [data-theme="dark"] [style*="background: var(--soft-y)"],
-    [data-theme="dark"] [style*="background: var(--soft-y)"] *,
+    [data-theme="dark"] [style*="background: var(--soft-y)"] *:not(.code-block):not(pre),
     [data-theme="dark"] [style*="background: var(--soft-y-2)"],
-    [data-theme="dark"] [style*="background: var(--soft-y-2)"] *,
+    [data-theme="dark"] [style*="background: var(--soft-y-2)"] *:not(.code-block):not(pre),
     [data-theme="dark"] [style*="background: var(--soft-p)"],
-    [data-theme="dark"] [style*="background: var(--soft-p)"] *,
+    [data-theme="dark"] [style*="background: var(--soft-p)"] *:not(.code-block):not(pre),
     [data-theme="dark"] [style*="background: var(--soft-g)"],
-    [data-theme="dark"] [style*="background: var(--soft-g)"] * { color: var(--ink); }
+    [data-theme="dark"] [style*="background: var(--soft-g)"] *:not(.code-block):not(pre) { color: var(--ink) !important; }
+
+    /* ===== section-tag 다크 색 강화 — 베이지 박스 + 진한 검정 글씨로 명도 차이 확보 ===== */
+    [data-theme="dark"] .section-tag { color: #0A0A0A; }
     /* nb-card-sm가 paper 변수를 인라인으로 쓰는 경우 — 텍스트는 ink 변수 따라감(자동 대비) */
   </style>
 </head>
