@@ -1,7 +1,14 @@
 # 공인중개사 5분 입문 — Claude Cowork 가이드 대시보드
 
-> **gpters 22기 W1 미니 사례** · 2026-05-20 (수) 작성 · 2026-05-21 검증·정정 1차
+> **gpters 22기 W1 미니 사례** · 2026-05-20 작성 · 2026-05-21 검증·정정 1차 · **2026-05-22 학습 가이드 보강(검증 게이트 2회차)**
 > 단일 정적 HTML 페이지 · Tailwind CDN · 라이트/다크 모드 · Cowork Dispatch(베타) 시연
+
+## 📄 사례글 (버전 관리)
+
+| 버전 | 파일 | 시점 | 특징 |
+|---|---|---|---|
+| **v2 (최신, 게시 권장)** ⭐ | [`case-study-v2.md`](./case-study-v2.md) | 2026-05-22 | HOW 5단계 + PROJECT 4구성요소 + 한계 4가지 + 검증 게이트 2회차 인사이트 |
+| v1 (초판, 이력 보존) | [`case-study.md`](./case-study.md) | 2026-05-21 | HOW 3단계 + 검증 게이트 1회차 (Dispatch 사실 정정) |
 
 ---
 
@@ -21,12 +28,14 @@
 
 ```
 cowork-intro-dashboard/
-├─ index.html       # 최종 결과물 (브라우저로 바로 열기)
-├─ content.md       # 카피 원본 (강의·블로그 재사용용) + 디자인 토큰
-├─ plan.md          # 이 서브 프로젝트 plan (4시간 분할)
-├─ AGENTS.md        # sub-agent 3종 정의 (cowork-curator / realtor-copy-writer / neobrutal-designer)
-├─ README.md        # 본 문서
-└─ assets/          # 이미지·아이콘
+├─ index.html         # 최종 결과물 (브라우저로 바로 열기) — v2 학습 가이드 반영
+├─ content.md         # 카피 원본 (강의·블로그 재사용용) + 디자인 토큰
+├─ plan.md            # 이 서브 프로젝트 plan (4시간 분할)
+├─ AGENTS.md          # sub-agent 3종 정의 (cowork-curator / realtor-copy-writer / neobrutal-designer)
+├─ case-study.md      # gpters 사례글 v1 (초판, 이력 보존)
+├─ case-study-v2.md   # gpters 사례글 v2 (최신, 게시 권장) ⭐
+├─ README.md          # 본 문서
+└─ assets/            # 이미지·아이콘
 ```
 
 ---
